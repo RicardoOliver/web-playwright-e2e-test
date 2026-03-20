@@ -8,7 +8,8 @@
     "bdd": "bddgen && playwright test",
     "bdd:gen": "bddgen",
     "k6:gen": "k6 run k6/load-test.js",
-    "report": "npx playwright show-report"
+    "report": "npx playwright show-report",
+    "smoke": "playwright test --grep @smoke"
 
   },
   "keywords": [],

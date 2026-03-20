@@ -1,3 +1,4 @@
+@smoke
 Feature: Busca de produtos na Amazon
 
   Background:
