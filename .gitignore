@@ -1,0 +1,70 @@
+﻿# =========================
+# Node
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# =========================
+# Playwright
+# =========================
+playwright-report/
+test-results/
+blob-report/
+playwright/.cache/
+
+# =========================
+# Evidências (testes)
+# =========================
+screenshots/
+videos/
+trace/
+
+# =========================
+# BDD (gerado automaticamente)
+# =========================
+.features-gen/
+
+# =========================
+# Logs
+# =========================
+logs/
+*.log
+
+# =========================
+# Sistema
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# IDEs / Editores
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# Variáveis de ambiente
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# Cobertura de testes
+# =========================
+coverage/
+
+# =========================
+# Build / Distribuição
+# =========================
+dist/
+build/
+
+# =========================
+# Cache geral
+# =========================
+.cache/
+.tmp/

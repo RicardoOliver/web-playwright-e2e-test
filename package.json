@@ -1,0 +1,22 @@
+{
+  "name": "playwright-e2e-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "bdd": "bddgen && playwright test",
+    "bdd:gen": "bddgen",
+    "k6:gen": "k6 run k6/load-test.js",
+    "report": "npx playwright show-report"
+
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "playwright-bdd": "^8.5.0",
+    "typescript": "^5.9.3"
+  }
+}
