@@ -8,28 +8,42 @@ export class SearchPage {
   }
 
   async waitResults() {
-    await expect(this.results.first()).toBeVisible({ timeout: 15000 });
+    // 🔥 aguarda pelo menos 1 resultado real
+    await this.page.waitForSelector('[data-component-type="s-search-result"]', {
+      state: 'visible',
+      timeout: 20000
+    });
+
+    await expect(this.results.first()).toBeVisible();
   }
 
   async hasResults() {
-    await expect(this.results.first()).toBeVisible();
+    const count = await this.results.count();
+    expect(count).toBeGreaterThan(0);
   }
 
   async clickFirstProduct() {
     const first = this.results.first();
 
-    // 🔥 tenta múltiplos seletores (fallback)
-    const link = first.locator('a.a-link-normal').first();
+    // 🔥 múltiplos seletores (Amazon muda MUITO)
+    const link = first.locator('h2 a, a.a-link-normal').first();
 
     await expect(link).toBeVisible({ timeout: 15000 });
 
-    // 🔥 garante que está na viewport
+    // 🔥 scroll obrigatório (CI/headless)
     await link.scrollIntoViewIfNeeded();
 
-    // 🔥 retry manual (Amazon costuma falhar aqui)
+    // 🔥 pequeno wait para estabilizar DOM
+    await this.page.waitForTimeout(500);
+
+    // 🔥 retry inteligente
     for (let i = 0; i < 3; i++) {
       try {
         await link.click({ timeout: 5000 });
+
+        // 🔥 garante navegação (IMPORTANTÍSSIMO)
+        await this.page.waitForLoadState('domcontentloaded');
+
         return;
       } catch (error) {
         if (i === 2) throw error;

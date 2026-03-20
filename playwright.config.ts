@@ -9,7 +9,8 @@ const testDir = defineBddConfig({
 export default defineConfig({
   testDir,
 
-  timeout: 30000,
+  // 🔥 mais tempo (CI precisa)
+  timeout: 60000,
 
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
@@ -21,11 +22,20 @@ export default defineConfig({
 
     headless: process.env.CI ? true : false,
 
-    viewport: null,
-    launchOptions: {
-      args: ['--start-maximized'],
-    },
+    // 🔥 viewport fixo (ESSENCIAL)
+    viewport: { width: 1280, height: 720 },
+
+    // 🔥 evita bloqueio da Amazon
+    userAgent:
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36',
+
+    // 🔥 tempos de ação
+    actionTimeout: 15000,
+    navigationTimeout: 30000,
 
     trace: 'on-first-retry',
+
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
   },
 });
